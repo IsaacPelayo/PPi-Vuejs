@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vue.js Todo List Example</title>
+  <!-- Importar Vue.js -->
+  <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+</head>
+<body>
+  <div id="app">
+    <h2>Lista de tareas</h2>
+    <input type="text" v-model="newTodo" @keyup.enter="addTodo">
+    <button @click="addTodo">Agregar</button>
+
+    <ul>
+      <li v-for="(todo, index) in todos" :key="index">
+        {{ todo }}
+        <button @click="removeTodo(index)">Eliminar</button>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Vue.js script -->
+  <script>
+    new Vue({
+      el: '#app',
+      data: {
+        newTodo: '',
+        todos: []
+      },
+      methods: {
+        addTodo() {
+          if (this.newTodo.trim() !== '') {
+            this.todos.push(this.newTodo.trim());
+            this.newTodo = '';
+          }
+        },
+        removeTodo(index) {
+          this.todos.splice(index, 1);
+        }
+      }
+    });
+  </script>
+</body>
+</html>
